@@ -32,7 +32,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '8000-thiago23-healthybite-bnbty42vrr2.ws.codeinstitute-ide.net',
-    'tgo-healthy-bite-bc4b5d66896a.herokuapp.com/',
+    'tgo-healthy-bite-bc4b5d66896a.herokuapp.com',
     'localhost'
 ]
 
