@@ -12,11 +12,15 @@
     <div>
         <p class="author">Author: {{ recipe.author }}</p>
     </div>
-    <a href="#">
-        <p>{{ recipe.description }} </p>
-        <p>{{ recipe.content | safe }} </p>
-    </a>
+    <div>
+        <h3>Ingredients:</h3>
+        <p>{{ recipe.ingredients | linebreaks }}</p>
+
+        <h3>Instructions:</h3>
+        <p>{{ recipe.instructions | linebreaks }}</p>
+    </div>
     <hr>
+    
     <div class="row">
         <div class="col-md-8 card mb-4  mt-3 ">
             <h3>Comments:</h3>
@@ -51,8 +55,8 @@
                 <h3>Leave a comment:</h3>
                 <p>Posting as: {{ user.username }}</p>
                 <form method="post" style="margin-top: 1.3em;">
-                    {{ comment_form | crispy }}
                     {% csrf_token %}
+                    {{ comment_form | crispy }}
                     <button type="submit" class="btn btn-signup btn-lg">Submit</button>
                 </form>
                 {% endif %}

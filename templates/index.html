@@ -4,21 +4,15 @@
 
 <div>
     {% for recipe in recipe_list  %}
-
     <div>
         <p class="author">Author: {{ recipe.author }}</p>
     </div>
-    <a href="#">
-        <a href="{% url 'recipe_detail' recipe.slug %}">
-            <h2>{{ Recipe.title }}</h2>
-            <p>{{ Recipe.instructions }}</p>
-        </a>
+    <a href="{% url 'recipe_detail' recipe.slug %}">
+        <h2>{{ Recipe.title }}</h2>
+        <p>{{ Recipe.instructions|truncatewords:30 }}</p>
     </a>
     <hr>
 
     {% endfor %}
 </div>
-
-
-
 {%endblock%}

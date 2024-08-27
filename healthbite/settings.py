@@ -159,6 +159,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
+# CSRF Trusted Origins
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-thiago23-healthybite-bnbty42vrr2.ws.codeinstitute-ide.net',
+    'https://tgo-healthy-bite-bc4b5d66896a.herokuapp.com'
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
