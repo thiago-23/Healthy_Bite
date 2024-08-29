@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
 from .models import Recipe
-from .forms import CommentForm
+from .forms import CommentForm, RecipeForm
 
 # Create your views here.
 
@@ -61,3 +61,8 @@ class RecipeDetail(View):
                 "comment_form": CommentForm()
             }
         )
+
+class RecipeCreate(generic.ListView):
+    model = Recipe
+    form_class = RecipeForm
+    template_name = 'recipe_create.html'
