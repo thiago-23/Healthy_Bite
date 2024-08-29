@@ -15,6 +15,7 @@ class Recipe(models.Model):
     created_on = models.DateTimeField(auto_now=True)
     status = models.IntegerField(choices=STATUS, default=0)
     likes = models.ManyToManyField(User, related_name='recipe_likes', blank=True)
+    cook_time = models.IntegerField(default=0)
 
     class Meta:
         ordering = ["-created_on"]

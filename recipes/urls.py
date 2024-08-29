@@ -5,4 +5,5 @@ urlpatterns = [
     path('', views.RecipeList.as_view(), name='home'),
     path('<slug:slug>/', views.RecipeDetail.as_view(), name='recipe_detail'),
     path('recipe-create/', views.RecipeCreate.as_view(), name='recipe_create'),
+    path('<slug:slug>/toggle_favourite/', views.toggle_favourite, name='toggle_favourite'),
 ]

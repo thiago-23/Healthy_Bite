@@ -21,6 +21,18 @@
         <p>{{ recipe.instructions | linebreaks }}</p>
     </div>
     <hr>
+
+    <!-- Favourite button -->
+    {% if user.is_authenticated %}
+        <form action="{% url 'toggle_favourite' recipe.slug %}" method="post">
+            {% csrf_token %}
+            {% if favourite %}
+                <button type="submit" class="btn btn-danger">Unfavourite</button>
+            {% else %}
+                <button type="submit" class="btn btn-primary">Favourite</button>
+            {% endif %}
+        </form>
+    {% endif %}
     
     <div class="row">
         <div class="col-md-8 card mb-4  mt-3 ">

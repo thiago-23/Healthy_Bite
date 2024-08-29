@@ -1,6 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
-from .models import Recipe
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from .models import Recipe, Bookmark
 from .forms import CommentForm, RecipeForm
 
 # Create your views here.
@@ -17,8 +19,11 @@ class RecipeDetail(View):
         queryset = Recipe.objects.filter(status=1)
         recipe = get_object_or_404(queryset, slug=slug)
         comments = recipe.comments.filter(approved=True).order_by('created_on')
-        # favourite = False
-        # if recipe.favourites.filter
+
+        # Check if the recipe is marked as a favourite by the current user
+        favourite = False
+        if request.user.is_authenticated:
+            favourite = Bookmark.objects.filter(user=request.user, recipe=recipe).exists()
 
         return render(
             request,
@@ -36,8 +41,11 @@ class RecipeDetail(View):
         queryset = Recipe.objects.filter(status=1)
         recipe = get_object_or_404(queryset, slug=slug)
         comments = recipe.comments.filter(approved=True).order_by('created_on')
-        # favourite = False
-        # if recipe.favourites.filter
+
+        # Check if the recipe is marked as a favourite by the current user
+        favourite = False
+        if request.user.is_authenticated:
+            favourite = Bookmark.objects.filter(user=request.user, recipe=recipe).exists()
 
         comment_form = CommentForm(data=request.POST)
 
@@ -62,7 +70,22 @@ class RecipeDetail(View):
             }
         )
 
-class RecipeCreate(generic.ListView):
+@method_decorator(login_required, name='dispatch')
+class RecipeCreate(generic.CreateView):
     model = Recipe
     form_class = RecipeForm
     template_name = 'recipe_create.html'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+@login_required
+def toggle_favourite(request, slug):
+    recipe = get_object_or_404(Recipe, slug=slug)
+    bookmark, created = Bookmark.objects.get_or_create(user=request.user, recipe=recipe)
+
+    if not created:
+        bookmark.delete()
+
+    return redirect('recipe_detail', slug=slug)
