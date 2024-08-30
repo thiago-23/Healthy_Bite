@@ -6,6 +6,7 @@
     <p>Are you sure you want to delete "{{ recipe.title }}"?</p>
     <form method="post">
         {% csrf_token %}
+        {{ form|crispy }}
         <button type="submit" class="btn btn-danger">Delete</button>
         <a href="{% url 'recipe_detail' recipe.slug %}" class="btn btn-secondary">Cancel</a>
     </form>

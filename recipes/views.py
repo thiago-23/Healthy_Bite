@@ -81,15 +81,17 @@ class RecipeCreate(generic.CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-@login_required
-def toggle_favourite(request, slug):
-    recipe = get_object_or_404(Recipe, slug=slug)
-    bookmark, created = Bookmark.objects.get_or_create(user=request.user, recipe=recipe)
+@method_decorator(login_required, name='dispatch')
+class RecipeEdit(generic.UpdateView):
+    model = Recipe
+    form_class = RecipeForm
+    template_name = 'recipe_edit.html'
+    success_url = reverse_lazy('home')
 
-    if not created:
-        bookmark.delete()
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
-    return redirect('recipe_detail', slug=slug)
 
 @method_decorator(login_required, name='dispatch')
 class RecipeDelete(generic.DeleteView):
@@ -100,3 +102,13 @@ class RecipeDelete(generic.DeleteView):
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(author=self.request.user)
+
+@login_required
+def toggle_favourite(request, slug):
+    recipe = get_object_or_404(Recipe, slug=slug)
+    bookmark, created = Bookmark.objects.get_or_create(user=request.user, recipe=recipe)
+
+    if not created:
+        bookmark.delete()
+
+    return redirect('recipe_detail', slug=slug)
