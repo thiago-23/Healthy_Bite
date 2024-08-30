@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .models import Recipe, Bookmark
@@ -89,3 +90,13 @@ def toggle_favourite(request, slug):
         bookmark.delete()
 
     return redirect('recipe_detail', slug=slug)
+
+@method_decorator(login_required, name='dispatch')
+class RecipeDelete(generic.DeleteView):
+    model = Recipe
+    template_name = 'recipe_delete.html'
+    success_url = reverse_lazy('home')
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(author=self.request.user)
