@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .models import Recipe, Bookmark
 from .forms import CommentForm, RecipeForm
+from django.template.defaultfilters import slugify
 
 # Create your views here.
 
@@ -77,9 +78,14 @@ class RecipeCreate(generic.CreateView):
     form_class = RecipeForm
     template_name = 'recipe_create.html'
 
+    def get_success_url(self):
+        return reverse('recipe_detail', kwargs={'slug': self.object.slug})
+
     def form_valid(self, form):
         form.instance.author = self.request.user
+        form.instance.slug = slugify(form.instance.title)
         return super().form_valid(form)
+
 
 @method_decorator(login_required, name='dispatch')
 class RecipeEdit(generic.UpdateView):
