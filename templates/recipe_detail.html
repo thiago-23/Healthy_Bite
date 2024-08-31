@@ -1,26 +1,32 @@
 {% extends "base.html" %}
 
 {% block title %}{{ recipe.title }} - Healthy Bite{% endblock %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
-{% load crispy_forms_tags %}
-
-
-<div>
+<div class="container">
     <h1>{{ recipe.title }}</h1>
 
-    <div>
-        <p class="author">Author: {{ recipe.author }}</p>
-    </div>
-    <div>
-        <h3>Ingredients:</h3>
-        <p>{{ recipe.ingredients | linebreaks }}</p>
+    <p><strong>Author:</strong> {{ recipe.author.username }}</p>
+    <p><strong>Ingredients:</strong></p>
+    <div>{{ recipe.ingredients|linebreaks }}</div>
 
-        <h3>Instructions:</h3>
-        <p>{{ recipe.instructions | linebreaks }}</p>
+    <p><strong>Instructions:</strong></p>
+    <div>{{ recipe.instructions|linebreaks }}</div>
+
+    <!-- Like and Bookmark Buttons -->
+    <div class="my-3">
+        <a href="{% url 'recipe_like' recipe.id %}" class="btn btn-primary">Like ({{ recipe.number_of_likes }})</a>
+        <a href="{% url 'toggle_favourite' slug=recipe.slug %}" class="btn btn-secondary">Bookmark</a>
     </div>
-    <hr>
+
+    {% if request.user == recipe.author %}
+    <div class="mb-4">
+        <a href="{% url 'recipe_edit' slug=recipe.slug %}" class="btn btn-info">Edit</a>
+        <a href="{% url 'recipe_delete' slug=recipe.slug %}" class="btn btn-danger">Delete</a>
+    </div>
+    {% endif %}
 
     <!-- Favourite button -->
     {% if user.is_authenticated %}
@@ -43,10 +49,10 @@
                 <div class="comments" style="padding: 10px;">
                     <p class="font-weight-bold">
                         <!-- The commenter's name goes here. Check the model if you're not sure what that is -->
-                        {{ comment.name }}
+                        {{ comment.author.username }}
                         <span class=" text-muted font-weight-normal">
                             <!-- The comment's created date goes here -->
-                            {{ comment.created_on }}
+                            {{ comment.created_on|date:"Y-m-d H:i" }}
                         </span> wrote:
                     </p>
                     <!-- The body of the comment goes before the | -->

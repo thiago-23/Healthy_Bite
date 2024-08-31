@@ -112,3 +112,12 @@ def toggle_favourite(request, slug):
         bookmark.delete()
 
     return redirect('recipe_detail', slug=slug)
+
+@login_required
+def like_recipe(request, id):
+    recipe = get_object_or_404(Recipe, id=id)
+    if recipe.likes.filter(id=request.user.id).exists():
+        recipe.likes.remove(request.user)
+    else:
+        recipe.likes.add(request.user)
+    return redirect('recipe_detail', slug=recipe.slug)
