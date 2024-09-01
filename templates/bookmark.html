@@ -18,6 +18,11 @@
                     <h5 class="card-title">{{ bookmark.recipe.title }}</h5>
                     <p class="card-text">{{ bookmark.recipe.description|truncatewords:20 }}</p>
                     <a href="{% url 'recipe_detail' bookmark.recipe.slug %}" class="btn btn-primary">View Recipe</a>
+
+                    <form action="{% url 'bookmark_recipe' bookmark.recipe.slug %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Remove Bookmark</button>
+                    </form>
                 </div>
             </div>
         </div>

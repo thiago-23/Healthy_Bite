@@ -1,7 +1,13 @@
 from django.urls import path
 from .views import (
-    RecipeList, RecipeDetail, RecipeCreate, RecipeEdit, RecipeDelete,
-    MyBookmarks, like_recipe, BookmarkRecipe 
+    RecipeList,
+    RecipeDetail,
+    RecipeCreate,
+    RecipeEdit,
+    RecipeDelete,
+    MyBookmarks,
+    like_recipe,
+    toggle_bookmark  
 )
 
 urlpatterns = [
@@ -12,6 +18,5 @@ urlpatterns = [
     path('mybookmarks/', MyBookmarks.as_view(), name='my_bookmarks'),
     path('recipe/<int:id>/like/', like_recipe, name='recipe_like'),
     path('<slug:slug>/', RecipeDetail.as_view(), name='recipe_detail'),
-    path('recipe/<slug:slug>/bookmark/', BookmarkRecipe.as_view(), name='bookmark_recipe'),
+    path('recipe/<slug:slug>/bookmark/', toggle_bookmark, name='bookmark_recipe'),  # Ensure this path is correct
 ]
-

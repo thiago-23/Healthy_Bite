@@ -148,3 +148,14 @@ def like_recipe(request, id):
     else:
         recipe.likes.add(request.user)
     return redirect('recipe_detail', slug=recipe.slug)
+
+@login_required
+def toggle_bookmark(request, slug):
+    recipe = get_object_or_404(Recipe, slug=slug)
+    bookmark, created = Bookmark.objects.get_or_create(user=request.user, recipe=recipe)
+
+    if not created:
+        # If the bookmark already exists, remove it (unbookmark)
+        bookmark.delete()
+    
+    return redirect('recipe_detail', slug=slug)
