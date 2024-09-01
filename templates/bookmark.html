@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}My Bookmarks - Healthy Bite{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>My Bookmarked Recipes</h1>
+    <div class="row">
+        {% for bookmark in bookmarks %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                {% if "placeholder" in bookmark.recipe.image.url %}
+                <img src="../static/media/istockphoto-2081769995-1024x1024-c4U3Gracg-transformed.jpeg"
+                     class="card-img-top" alt="placeholder image">
+                {% else %}
+                <img src="{{ bookmark.recipe.image.url }}" class="card-img-top" alt="Recipe Image">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ bookmark.recipe.title }}</h5>
+                    <p class="card-text">{{ bookmark.recipe.description|truncatewords:20 }}</p>
+                    <a href="{% url 'recipe_detail' bookmark.recipe.slug %}" class="btn btn-primary">View Recipe</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

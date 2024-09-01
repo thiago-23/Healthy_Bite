@@ -28,10 +28,10 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Profile</a>
+                        <a class="nav-link" href="{% url 'recipe_create' %}">Add Recipe</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'recipe_create' %}">Add Recipe</a>
+                        <a class="nav-link" href="{% url 'my_bookmarks' %}">My Bookmarks</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>

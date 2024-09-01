@@ -6,6 +6,14 @@
 {% block content %}
 
 <div class="container">
+    <div class="col-12 col-md-4">
+        {% if "placeholder" in recipe.image.url %}
+        <img src="../static/media/istockphoto-2081769995-1024x1024-c4U3Gracg-transformed.jpeg"
+            class="recipe-detail-img" alt="placeholder image">
+        {% else %}
+        <img src="{{ recipe.image.url }}" alt="recipe image" class="recipe-detail-img">
+        {% endif %}
+    </div>
     <h1>{{ recipe.title }}</h1>
 
     <p><strong>Author:</strong> {{ recipe.author.username }}</p>
@@ -18,7 +26,6 @@
     <!-- Like and Bookmark Buttons -->
     <div class="my-3">
         <a href="{% url 'recipe_like' recipe.id %}" class="btn btn-primary">Like ({{ recipe.number_of_likes }})</a>
-        <a href="{% url 'toggle_favourite' slug=recipe.slug %}" class="btn btn-secondary">Bookmark</a>
     </div>
 
     {% if request.user == recipe.author %}
@@ -28,14 +35,14 @@
     </div>
     {% endif %}
 
-    <!-- Favourite button -->
+    <!-- Bookmark Button -->
     {% if user.is_authenticated %}
-        <form action="{% url 'toggle_favourite' recipe.slug %}" method="post">
+        <form action="{% url 'bookmark_recipe' recipe.slug %}" method="post">
             {% csrf_token %}
             {% if favourite %}
-                <button type="submit" class="btn btn-danger">Unfavourite</button>
+                <button type="submit" class="btn btn-danger">Remove Bookmark</button>
             {% else %}
-                <button type="submit" class="btn btn-primary">Favourite</button>
+                <button type="submit" class="btn btn-primary">Bookmark</button>
             {% endif %}
         </form>
     {% endif %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
+from django.views.generic import ListView
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -22,10 +23,10 @@ class RecipeDetail(View):
         recipe = get_object_or_404(queryset, slug=slug)
         comments = recipe.comments.filter(approved=True).order_by('created_on')
 
-        # Check if the recipe is marked as a favourite by the current user
-        favourite = False
+        # Check if the recipe is marked as a bookmarked by the current user
+        bookmarked = False
         if request.user.is_authenticated:
-            favourite = Bookmark.objects.filter(user=request.user, recipe=recipe).exists()
+            bookmarked = Bookmark.objects.filter(user=request.user, recipe=recipe).exists()
 
         return render(
             request,
@@ -34,7 +35,7 @@ class RecipeDetail(View):
                 "recipe": recipe,
                 "comments": comments,
                 "commented": False,
-                "favourite": favourite,
+                "bookmarked": bookmarked,
                 "comment_form": CommentForm()
             }
         )
@@ -44,10 +45,10 @@ class RecipeDetail(View):
         recipe = get_object_or_404(queryset, slug=slug)
         comments = recipe.comments.filter(approved=True).order_by('created_on')
 
-        # Check if the recipe is marked as a favourite by the current user
-        favourite = False
+        # Check if the recipe is marked as a bookmarked by the current user
+        bookmarked = False
         if request.user.is_authenticated:
-            favourite = Bookmark.objects.filter(user=request.user, recipe=recipe).exists()
+            bookmarked = Bookmark.objects.filter(user=request.user, recipe=recipe).exists()
 
         comment_form = CommentForm(data=request.POST)
 
@@ -67,7 +68,7 @@ class RecipeDetail(View):
                 "recipe": recipe,
                 "comments": comments,
                 "commented": True,
-                "favourite": favourite,
+                "bookmarked": bookmarked,
                 "comment_form": CommentForm()
             }
         )
@@ -109,15 +110,35 @@ class RecipeDelete(generic.DeleteView):
         queryset = super().get_queryset()
         return queryset.filter(author=self.request.user)
 
-@login_required
-def toggle_favourite(request, slug):
-    recipe = get_object_or_404(Recipe, slug=slug)
-    bookmark, created = Bookmark.objects.get_or_create(user=request.user, recipe=recipe)
+# @login_required
+# def toggle_bookmarked(request, slug):
+#     recipe = get_object_or_404(Recipe, slug=slug)
+#     bookmark, created = Bookmark.objects.get_or_create(user=request.user, recipe=recipe)
 
-    if not created:
-        bookmark.delete()
+#     if not created:
+#         bookmark.delete()
 
-    return redirect('recipe_detail', slug=slug)
+#     return redirect('recipe_detail', slug=slug)
+
+@method_decorator(login_required, name='dispatch')
+class MyBookmarks(ListView):
+    model = Bookmark
+    template_name = 'bookmark.html'
+    context_object_name = 'bookmarks'
+
+    def get_queryset(self):
+        return Bookmark.objects.filter(user=self.request.user).select_related('recipe')
+
+@method_decorator(login_required, name='dispatch')
+class BookmarkRecipe(View):
+    def post(self, request, slug):
+        recipe = get_object_or_404(Recipe, slug=slug)
+        bookmark, created = Bookmark.objects.get_or_create(user=request.user, recipe=recipe)
+
+        if not created:
+            bookmark.delete()
+
+        return redirect('recipe_detail', slug=slug)
 
 @login_required
 def like_recipe(request, id):
