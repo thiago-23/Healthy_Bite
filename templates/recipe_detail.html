@@ -18,6 +18,7 @@
     <h1>{{ recipe.title }}</h1>
 
     <p><strong>Author:</strong> {{ recipe.author.username }}</p>
+    <p><i class="fas fa-clock"></i> <strong>Cook Time:</strong> {{ recipe.cook_time }} minutes</p>
     <p><strong>Ingredients:</strong></p>
     <div>{{ recipe.ingredients|linebreaks }}</div>
 
