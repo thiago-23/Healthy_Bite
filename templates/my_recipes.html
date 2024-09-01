@@ -4,6 +4,7 @@
 {% block content %}
 <div class="container">
     <h1>My Recipes</h1>
+    {% if recipes %}
     <div class="row">
         {% for recipe in recipes %}
         <div class="col-md-4 mb-4">
@@ -18,5 +19,8 @@
         </div>
         {% endfor %}
     </div>
+    {% else %}
+    <p>You have not added any recipes yet. Click <a href="{% url 'recipe_create' %}">here</a> to add a new recipe!</p>
+    {% endif %}
 </div>
 {% endblock content %}
