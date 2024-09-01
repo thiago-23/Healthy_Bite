@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
 from django.views.generic import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin 
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -159,3 +160,11 @@ def toggle_bookmark(request, slug):
         bookmark.delete()
     
     return redirect('recipe_detail', slug=slug)
+
+class MyRecipes(LoginRequiredMixin, ListView):
+    model = Recipe
+    template_name = 'my_recipes.html'  # Create this template
+    context_object_name = 'recipes'
+
+    def get_queryset(self):
+        return Recipe.objects.filter(author=self.request.user)

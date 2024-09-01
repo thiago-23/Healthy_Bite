@@ -27,23 +27,27 @@
                         <a class="nav-link" href="{% url 'home' %}"> Home</a>
                     </li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'recipe_create' %}">Add Recipe</a>
+                    <!-- Dropdown for authenticated users -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ user.username }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'my_recipes' %}">My Recipes</a>
+                            <a class="dropdown-item" href="{% url 'my_bookmarks' %}">Bookmarks</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'my_bookmarks' %}">My Bookmarks</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
-                    </li>
-                    {% else %}
+                {% else %}
+                    <!-- Links for unauthenticated users -->
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'account_login' %}">Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a>
                     </li>
-                    {% endif %}
+                {% endif %}
                 </ul>
             </div>
         </nav>
