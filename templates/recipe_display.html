@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Healthy Bite | All Recipes{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="page-title text-center">Our Delicious Recipes</h1>
+        </div>
+    </div>
+    <hr class="home-break">
+    <br>
+    <!-- Recipe Cards -->
+    <div class="row">
+        {% for recipe in recipe_list %}
+        <div class="col-sm-6 col-md-4 col-lg-3 mb-4 d-flex align-items-stretch">
+            <div class="card shadow-sm">
+                {% if "placeholder" in recipe.image.url %}
+                <img src="{% static 'images/placeholder_image.jpg' %}" class="card-img-top" alt="placeholder image">
+                {% else %}
+                <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" class="card-img-top">
+                {{ recipe.image.url }}
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title text-truncate">{{ recipe.title }}</h5>
+                    <p class="card-text">
+                        <span><i class="far fa-clock pr-2"></i></span>
+                        <span>Cook Time: {{ recipe.cook_time }} minutes</span>
+                    </p>
+                    <a href="{% url 'recipe_detail' recipe.slug %}" class="btn btn-primary btn-block">View Recipe</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
