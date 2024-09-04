@@ -4,7 +4,7 @@
 /* Base Styles */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f4;
+    background-color: #D2DEEB; /* Updated background color */
     color: #333;
     margin: 0;
     padding: 0;
@@ -12,18 +12,18 @@ body {
 
 /* Navigation Bar */
 .navbar {
-    background-color: #fff;
+    background-color: #B6CBD5; /* Updated background color */
     border-bottom: 2px solid #eaeaea;
 }
 
 .navbar-brand {
     font-weight: 700;
-    color: #2c3e50;
+    color: rgb(0 0 0 / 68%); /* Updated text color */
     font-size: 24px;
 }
 
 .nav-link {
-    color: #2c3e50;
+    color: rgb(0 0 0 / 68%); /* Updated text color */
     font-weight: 500;
     transition: color 0.3s ease;
 }
@@ -83,6 +83,7 @@ main {
     color: #555;
 }
 
+/* Button Styles */
 .btn-primary {
     background-color: #8394A7;
     border-color: #8394A7;
@@ -91,4 +92,23 @@ main {
 .btn-primary:hover {
     background-color: #6b7a8c;
     border-color: #6b7a8c;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #B6CBD5; /* Updated background color */
+    color: rgb(0 0 0 / 68%); /* Updated text color */
+    padding: 20px 0;
+    text-align: center;
+    height: 100px;
+}
+
+footer p, footer a, footer i {
+    color: rgb(0 0 0 / 68%); /* Ensure text and icons are the same color as navbar text */
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+footer a:hover, footer i:hover {
+    color: #e67e22; /* Same hover color as navbar links */
 }
