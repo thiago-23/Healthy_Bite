@@ -54,3 +54,41 @@ main {
     margin: 30px auto;
     max-width: 1000px;
 }
+
+/* Custom Styles for Recipe Cards */
+.card {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.card-text {
+    color: #555;
+}
+
+.btn-primary {
+    background-color: #8394A7;
+    border-color: #8394A7;
+}
+
+.btn-primary:hover {
+    background-color: #6b7a8c;
+    border-color: #6b7a8c;
+}
