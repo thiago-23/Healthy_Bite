@@ -18,7 +18,8 @@ class RecipeList(generic.ListView):
     model = Recipe
     queryset = Recipe.objects.filter(status=1).order_by('-created_on')
     template_name = 'recipe_display.html'
-    paginate_by = 6
+    context_object_name = 'recipe_list'
+    paginate_by = 8
 
 class RecipeDetail(View):
 
@@ -114,16 +115,6 @@ class RecipeDelete(generic.DeleteView):
         queryset = super().get_queryset()
         return queryset.filter(author=self.request.user)
 
-# @login_required
-# def toggle_bookmarked(request, slug):
-#     recipe = get_object_or_404(Recipe, slug=slug)
-#     bookmark, created = Bookmark.objects.get_or_create(user=request.user, recipe=recipe)
-
-#     if not created:
-#         bookmark.delete()
-
-#     return redirect('recipe_detail', slug=slug)
-
 @method_decorator(login_required, name='dispatch')
 class MyBookmarks(ListView):
     model = Bookmark
@@ -166,7 +157,7 @@ def toggle_bookmark(request, slug):
 
 class MyRecipes(LoginRequiredMixin, ListView):
     model = Recipe
-    template_name = 'my_recipes.html'  # Create this template
+    template_name = 'my_recipes.html'
     context_object_name = 'recipes'
 
     def get_queryset(self):
