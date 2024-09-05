@@ -63,6 +63,22 @@
             </nav>
         </header>
 
+        <!-- Below from Code Institute's I Think Therefore I Blog project -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    {% for message in messages %}
+                    <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
+                        {{ message | safe }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
         <!-- Content goes here -->
         <main class="py-4">
             {% block content %}
@@ -79,6 +95,15 @@
             <a href="https://www.instagram.com/" class="text-white mx-2"><i class="fab fa-instagram"></i></a>
         </div>
     </footer>
+
+    <!-- Script to manage messages fading from Code Institute's I Think Therefore I Blog project -->
+    <script>
+        setTimeout(function () {
+            let messages = document.getElementById("msg");
+            let alert = new bootstrap.Alert(messages);
+            alert.close();
+        }, 3000);
+    </script>
 
     <!-- Bootstrap scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
