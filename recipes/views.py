@@ -1,11 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
-from django.views.generic import ListView
+from django.views.generic import ListView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from .models import Recipe, Bookmark
+from .models import Recipe, Bookmark, Comment
 from .forms import CommentForm, RecipeForm
 from django.template.defaultfilters import slugify
 
@@ -164,3 +164,22 @@ class MyRecipes(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Recipe.objects.filter(author=self.request.user)
+
+# Delete a user's comment
+@method_decorator(login_required, name='dispatch')
+class CommentDeleteView(LoginRequiredMixin, DeleteView):
+    model = Comment
+    template_name = 'comment_delete.html'
+
+    def get_queryset(self):
+        """
+        Ensure that users can only delete their own comments.
+        """
+        queryset = super().get_queryset()
+        return queryset.filter(author=self.request.user)
+
+    def get_success_url(self):
+        """
+        Redirect to the recipe detail page after a successful deletion.
+        """
+        return reverse_lazy('recipe_detail', kwargs={'slug': self.object.recipe.slug})
