@@ -118,6 +118,10 @@ main {
 }
 
 
+.form-group label {
+    font-weight: bold !important;
+}
+
 /* Footer Styles */
 footer {
     background-color: #B6CBD5; /* Updated background color */
