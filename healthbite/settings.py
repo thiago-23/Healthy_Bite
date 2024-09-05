@@ -57,6 +57,11 @@ INSTALLED_APPS = [
     'recipes',
 ]
 
+SUMMERNOTE_CONFIG = {
+    'width': '100%',
+    'height': '250',
+}
+
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
