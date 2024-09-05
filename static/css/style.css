@@ -4,28 +4,30 @@
 /* Base Styles */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #D2DEEB; /* Updated background color */
+    background-color: #D2DEEB; 
     color: #333;
     margin: 0;
     padding: 0;
+    line-height: 1.6;
 }
 
 /* Navigation Bar */
 .navbar {
-    background-color: #B6CBD5; /* Updated background color */
-    border-bottom: 2px solid #eaeaea;
+    background-color: #B6CBD5;
+    padding: 1rem 1rem;
 }
 
 .navbar-brand {
     font-weight: 700;
-    color: rgb(0 0 0 / 68%); /* Updated text color */
-    font-size: 24px;
+    color: rgb(0 0 0 / 68%);
+    font-size: 1.5rem;
 }
 
 .nav-link {
-    color: rgb(0 0 0 / 68%); /* Updated text color */
+    color: rgb(0 0 0 / 68%); 
     font-weight: 500;
     transition: color 0.3s ease;
+    padding: 0.5rem 1rem;
 }
 
 .nav-link:hover {
@@ -41,7 +43,8 @@ header {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 10;
     width: 100%;
-    position: sticky;
+    background-color: #B6CBD5;
+    padding: 0.5rem 1rem;
     top: 0;
 }
 
@@ -60,16 +63,17 @@ main {
     border: none;
     border-radius: 8px;
     overflow: hidden;
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Added shadow transition */
 }
 
 .card:hover {
     transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 .card-img-top {
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    /* border-top-left-radius: 8px;
+    border-top-right-radius: 8px; */
     height: 200px;
     object-fit: cover;
 }
@@ -77,16 +81,19 @@ main {
 .card-title {
     font-size: 1.25rem;
     color: #333;
+    font-weight: 700;
 }
 
 .card-text {
     color: #555;
+    font-size: 0.9rem;
 }
 
 /* Button Styles */
 .btn-primary {
     background-color: #8394A7;
     border-color: #8394A7;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .btn-primary:hover {
@@ -94,14 +101,33 @@ main {
     border-color: #6b7a8c;
 }
 
+.btn {
+    border-radius: 50px; /* Rounded buttons for a modern look */
+}
+
+/* Form Control Styles */
+.form-control {
+    border-radius: 4px;
+    box-shadow: none;
+    border-color: #eaeaea; /* Subtle border color for form inputs */
+}
+
+.form-control:focus {
+    border-color: #6b7a8c;
+    box-shadow: 0 0 0 0.2rem rgba(107, 122, 140, 0.25);
+}
+
+
 /* Footer Styles */
 footer {
     background-color: #B6CBD5; /* Updated background color */
     color: rgb(0 0 0 / 68%); /* Updated text color */
     padding: 20px 0;
     text-align: center;
-    height: 100px;
+    height: auto;
 }
+
+
 
 footer p, footer a, footer i {
     color: rgb(0 0 0 / 68%); /* Ensure text and icons are the same color as navbar text */
