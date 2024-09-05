@@ -10,6 +10,7 @@ from .views import (
     like_recipe,
     toggle_bookmark,
     MyRecipes,
+    CommentUpdateView,
     CommentDeleteView 
 )
 
@@ -23,6 +24,7 @@ urlpatterns = [
     path('recipe/<int:id>/like/', like_recipe, name='recipe_like'),
     path('recipe/<slug:slug>/bookmark/', toggle_bookmark, name='bookmark_recipe'),
     path('my-recipes/', MyRecipes.as_view(), name='my_recipes'),
+    path('comment-update/<int:pk>/', CommentUpdateView.as_view(), name='comment_update'),
     path('comment-delete/<int:pk>/', CommentDeleteView.as_view(), name='comment_delete'),
     path('<slug:slug>/', RecipeDetail.as_view(), name='recipe_detail'),
 ]

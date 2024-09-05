@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
-from django.views.generic import ListView, DeleteView
+from django.views.generic import ListView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
@@ -164,6 +164,26 @@ class MyRecipes(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Recipe.objects.filter(author=self.request.user)
+
+# Update a user's comment
+@method_decorator(login_required, name='dispatch')
+class CommentUpdateView(LoginRequiredMixin, UpdateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'comment_update.html'
+
+    def get_queryset(self):
+        """
+        Ensure that users can only update their own comments.
+        """
+        queryset = super().get_queryset()
+        return queryset.filter(author=self.request.user)
+
+    def get_success_url(self):
+        """
+        Redirect to the recipe detail page after a successful update.
+        """
+        return reverse_lazy('recipe_detail', kwargs={'slug': self.object.recipe.slug})
 
 # Delete a user's comment
 @method_decorator(login_required, name='dispatch')
