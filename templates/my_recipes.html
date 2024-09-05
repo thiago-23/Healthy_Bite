@@ -1,9 +1,10 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}My Recipes - Healthy Bite{% endblock %}
 
 {% block content %}
 <div class="container">
-    <h1>My Recipes</h1>
+    <h1 class="text-center mb-4">My Recipes</h1>
     {% if recipes %}
     <div class="row">
         {% for recipe in recipes %}
@@ -19,8 +20,14 @@
         </div>
         {% endfor %}
     </div>
+
+    <!-- Include Pagination -->
+    <div class="pagination-container mt-4">
+        {% include 'pagination.html' %}
+    </div>
+
     {% else %}
-    <p>You have not added any recipes yet. Click <a href="{% url 'recipe_create' %}">here</a> to add a new recipe!</p>
+    <p class="text-center">You have not added any recipes yet. Click <a href="{% url 'recipe_create' %}">here</a> to add a new recipe!</p>
     {% endif %}
 </div>
 {% endblock content %}

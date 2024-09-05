@@ -160,6 +160,7 @@ class MyRecipes(LoginRequiredMixin, ListView):
     model = Recipe
     template_name = 'my_recipes.html'
     context_object_name = 'recipes'
+    paginate_by = 6 
 
     def get_queryset(self):
         return Recipe.objects.filter(author=self.request.user)
