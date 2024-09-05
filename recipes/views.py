@@ -58,13 +58,14 @@ class RecipeDetail(View):
         comment_form = CommentForm(data=request.POST)
 
         if comment_form.is_valid():
-            comment_form.instance.email = request.user.email
-            comment_form.instance.name = request.user.username
             comment = comment_form.save(commit=False)
             comment.recipe = recipe
+            comment.author = request.user
+            comment.email = request.user.email
             comment.save()
+            commented = True
         else:
-            comment_form = CommentForm()
+            commented = False
 
         return render(
             request,
