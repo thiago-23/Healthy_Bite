@@ -16,7 +16,6 @@
                 <img src="{% static 'images/placeholder_image.jpg' %}" class="card-img-top" alt="placeholder image">
                 {% else %}
                 <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" class="card-img-top">
-                {{ recipe.image.url }}
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ recipe.title }}</h5>
