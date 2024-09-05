@@ -138,3 +138,32 @@ footer p, footer a, footer i {
 footer a:hover, footer i:hover {
     color: #e67e22; /* Same hover color as navbar links */
 }
+
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 1rem; /* Further reduce size on extra small screens */
+    }
+
+    main {
+        padding: 10px; /* Less padding for very small screens */
+        margin: 5px; /* Minimal margin */
+        max-width: 100%;
+    }
+
+    .btn {
+        width: 100%; /* Make buttons full width on small screens */
+        margin-bottom: 10px; /* Add space between buttons */
+    }
+
+    .card-img-top {
+        height: 150px; /* Further reduce image height */
+    }
+
+    footer {
+        padding: 10px 0; /* Less padding in footer */
+    }
+
+    footer p, footer a, footer i {
+        font-size: 0.8rem; /* Even smaller footer text for extra small screens */
+    }
+}
