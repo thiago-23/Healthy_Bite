@@ -51,6 +51,139 @@ The site uses a soft, natural color palette featuring light blue, light green, a
 #### Fonts
 The primary font used is **Roboto**, used for headers and contents. A clean and modern font that enhance readability while providing a stylish look.
 
+## Features
+
+### Header
+
+![header](docs/features/header.png)
+
+- The header contains the Healthy Bite logo and navigation links for recipes, home page. Login and Signup status.
+
+**Navigation Bar**
+
+![header](docs/features/header_log.png)
+
+- The navigation bar is prrsent at the top of every page and includes all links to various pages.
+- Under username displayed at top right, a dropdown menu show the options to a logged user to browser their own recipes and bookmarded recipes. 
+
+### Footer
+
+![header](docs/features/footer.png)
+
+- The footer section includes links to Facebook, Twitter and instagram.
+- Clicking the links in the footer opens a separate browser tab to avoid pulling the user away from the site.
+
+### Home Page
+
+**Call to Action Section**
+
+![header](docs/features/home-page-signup.png)
+
+- The home page includes a call to action section which encourages the user to sign up to the site with the message "Discover the Joy of Healthy Eating!" and an image of a family dinner.
+- the page includes a signup button whish takes the user to the signup page.
+
+![header](docs/features/home-page-loged.png)
+
+- When the user login the page display a "Welocome back to Healthy Bite!" with a button to create a Recipe.
+- By clicking on the button the page redirects the user to add recipe page.
+
+### User Account Pages
+
+**Sign Up**
+
+![header](docs/features/signup.png)
+
+**Log In**
+
+![header](docs/features/login.png)
+
+**Log Out**
+
+![header](docs/features/logout.png)
+
+- Django allauth was installed and used to create the Sign up, Log in and Log out functionality.
+- A Success messafes display to user when they have logged in/ logged ou successfully.
+
+### Recipes
+
+![header](docs/features/recipes.png)
+
+- This Page displays all recipes with a clear recipe titles, cook time and images. 
+- The recipes cards are paginated every 8 recipes.
+- Clicking in View Recipe button on the recipe cards, it will redirect the user to recipes detailed page.
+
+### Recipes Details
+
+![header](docs/features/recipes_details.png)
+
+- When the recipe is clicked the header shows the recipe tiltle, created by and cook time for that recipe.
+
+![header](docs/features/recipes_instructions.png)
+
+Also, when the user click to View recipes a ingredients  and instructions are displayed informing the user what need to prep that recipe.
+
+**Comments Section**
+
+![header](docs/features/recipe_comment.png)
+
+- Below the instructions a comment card is displayed with recents comments, and if the user left a comment before they are able to edit/ delete their own comments. 
+
+![header](docs/features/leave_comment.png)
+![header](docs/features/waiting_approval.png)
+
+- If the user wnats to leave a comment they are allowed to submit their comment, and a display message will appear "Your comment is awaiting approval" 
+
+![header](docs/features/click_edit.png)
+
+- If the comment is aproved by the admin and the user wnats to update their comments, clicking on the edit button will redirect to the comment edit page.
+
+![header](docs/features/edit_comment.png)
+
+![header](docs/features/delete_comment.png)
+
+- If the user wants to delete their own comments, clicking on the delete button, will redirect to Delete Comment page.
+
+### Add Recipe Form
+
+![header](docs/features/add_recipes.png)
+
+- If the user is logged in, then they can add a recipe by clicking the link on the navigation bar.
+- The form fields for 'Ingredients' and 'Instructions' include a WYSIWYG editor called Summernote to help the user format their content by adding bullet points, headings etc.
+- The user can upload a photo if they wish. If they choose not to, a default image displays as their recipe image.
+- The user can choose to publish the recipe now or draft for later through a drop down menu. If they choose to 'Draft', the recipe will not appear on the Recipes page but the user will be able to access it in their 'My Recipes' page and it will be labelled as 'DRAFT'.
+- Failing to fill out the recipe's Title, Description, instructions, results in the form failing and rendering a message stating which fields you have missed.
+
+### Update Recipe Form
+
+![header](docs/features/edit_recipes.png)
+
+- If the user is logged in and is the author or the recipe they can choose to edit the recipe by clicking the edit button on the recipe detail page. 
+- The form opens with all fields populated with the original content.
+- the users can update and save their own recipes successfully.
+
+### Delete Recipe
+
+ ![header](docs/features/delete_recipes.png)
+
+- If the user is logged in and is the author or the recipe they can choose to delete the recipe by clicking the delete button on the recipe detail page.  
+- The user is asked to confirm if they wish to delete the recipe or cancel.
+
+### My Recipes Page
+
+![header](docs/features/myrecipes.png)
+
+- This page displays all recipes which the logged in user has created.
+- The recipe cards are paginated after every 6 recipes. 
+- Each card displays the recipe's image and Title. 
+- Clicking View recipe card will take you directly to that recipe's detailed page.
+
+### My Bookmarks Page
+
+![header](docs/features/my_bookmark.png)
+
+- This page displays all recipes which the logged in user has added to their bookmarks.
+- Clicking View recipe card will take you directly to that recipe's detailed page.
+- If a user wants to remove bookmark recipes, a "Remove Nookmark" is displayed under "View Recipes"
 
 ### Custom Error Pages
 Custom error pages were designed for a better user experience, provinding them with butons to get them back to the site.
@@ -60,12 +193,7 @@ Custom error pages were designed for a better user experience, provinding them w
 - 404 Page Not Found - The page you're looking for doesn't exist.
 - 500 Server Error - Something went wrong on our end. Please try again later.
 
-
-## Features
-
 ### Future Features
-
-
 
 ## Deployment - Heroku
 To deploy this page to Heroku from its GitHub repository, the following steps were taken:
