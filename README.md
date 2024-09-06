@@ -15,7 +15,9 @@ You can visit the live version of the blog here: [Healthy Bite](https://tgo-heal
       - [User Stories](#user-stories)
       - [Design](#design)
         - [Fonts](#fonts)
-  -- [Features](#features)
+  - [Agile methodology ](#agile-methodology)
+  - [data model](#data-model)
+  - [Features](#features)
     - [Header](#header)
     - [Footer](#footer)
     - [Home Page](#home-page)
@@ -70,6 +72,26 @@ Visitors to Healthy Bite are health-conscious individuals who enjoy discovering 
 ### Design
 
 The website is designed to be visually appealing, with a calming and clean interface that encourages healthy living and mindful eating.
+
+## Agile Methodology
+
+Github projects was used to manage the development process using an agile approach. Please see link to project board [here](https://github.com/thiago-23/Healthy_Bite.git)
+
+A Github Issue was created for each User Story which was then allocated to a milestone(Epic). Each User Story has defined acceptance criteria to make it clear when the User Story has been completed. The acceptance criteria are further broken down into tasks to facilitate the User Story's execution.
+
+## Data Model
+I used principles of Object-Oriented Programming throughout this project and Django’s Class-Based Generic Views.  
+
+Django AllAuth was used for the user authentication system.
+
+In order for the users to create recipes a custom recipe model was required. The recipe author is a foreign key to the User model given a recipe can only have one author.
+
+The Comment model allows users to comment on individual recipes and the Recipe is a foreign key in the comment model given a comment can only be linked to one recipe. 
+
+The diagram below details the database schema.
+
+![Database Schema](docs/readme_images/diagram.png)
+
 
 #### Colour Scheme
 
