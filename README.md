@@ -38,6 +38,13 @@ Visitors to Healthy Bite are health-conscious individuals who enjoy discovering 
 
 ### Design
 
+The website is designed to be visually appealing, with a calming and clean interface that encourages healthy living and mindful eating.
+
+#### Colour Scheme
+The site uses a soft, natural color palette featuring greens, browns, and whites to reflect the healthy, organic theme of the platform.
+
+![Colour Palette](docs/readme_images/colour%20scheme.png)
+
 ## Features
 
 ### Future Features
