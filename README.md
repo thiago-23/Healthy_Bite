@@ -10,6 +10,37 @@ You can visit the live version of the blog here: [Healthy Bite](https://tgo-heal
 
 ## Table of Contents
 
+- [Healthy Bite](#healthy-bite)
+  - [User Experience (UX)](#user-experience-ux)
+      - [User Stories](#user-stories)
+      - [Design](#design)
+        - [Fonts](#fonts)
+  -- [Features](#features)
+    - [Header](#header)
+    - [Footer](#footer)
+    - [Home Page](#home-page)
+    - [User Account Pages](#user-account-pages)
+    - [Recipes](#recipes)
+    - [Recipe Detail Page](#recipes-details)
+    - [Add Recipe Form](#add-recipe-form)
+    - [Update Recipe Form](#update-recipe-form)
+    - [Delete Recipe](#delete-recipe)
+    - [My Recipes Page](#my-recipes-page)
+    - [My Bookmarks Page](#my-bookmarks-page)
+    - [Custom Error Pages](#custom-error-pages)
+    - [Future Features](#future-features)
+  - [Validator Testing](#validator-testing)
+      -[HMTL](#html)
+      -[CSS](#css)
+      -[JavaScript](#javascript)
+      -[Lighouse](#lighthouse)
+  - [Deployment - Heroku](#deployment---heroku)
+  - [Forking this repository](#forking-this-repository)
+  - [Cloning this repository](#cloning-this-repository)
+  - [Languages](#languages)
+  - [Credits](#credits)
+  - [Acknowledgements](#acknowledgments)
+
 
 ## User Experience (UX)
 
@@ -195,6 +226,90 @@ Custom error pages were designed for a better user experience, provinding them w
 
 ### Future Features
 
+## Validator Testing
+
+### HTML
+
+All HTML pages were run through the [W3C HTML Validator](https://validator.w3.org/). See results in below table.
+
+| Page                 | Logged Out | Logged In |
+|----------------------|------------|-----------|
+| 400.html             | No errors  | No errors |
+| 403.html             | N/A        | No errors |
+| 404.html             | No errors  | No errors |
+| 500.html             | No errors  | No errors |
+| base.html            | No errors  | No errors |
+| bookmarks.html       | N/A        | No errors |
+| comment_delete.html  | N/A        | No errors |
+| comment_update.html  | N/A        | No errors |
+| index.html           | No errors  | No errors |                  
+| my_recipes.html      | N/A        | No errors |
+| paginator.html       | No errors  | No errors |
+| recipe_create.html   | N/A        | No errors |
+| recipe_delete.html   | N/A        | No errors |
+| recipe_detail.html   | No errors  | No errors |
+| recipe_diplay.html   | No errors  | No errors |
+| recipe_edit.html     | N/A        | Note 1    |
+| login.html           | No errors  | N/A       |
+| logout.html          | N/A        | No errors |
+| signup.html          | No errors  | N/A       |
+
+### CSS
+No errors were found when passing my CSS file through the official [W3C CSS Validator](https://jigsaw.w3.org/css-validator/)
+
+![header](docs/readme_images/css.png)
+
+### Javascript
+No errors were found when passing my javascript through [Jshint](https://jshint.com/) 
+
+<details>
+
+<summary>Jshint</summary>
+
+![Jshint](docs/readme_images/jshint.png)
+</details>
+
+### Python
+All Python files were run through [Pep8](http://pep8online.com/) with no errors found. 
+
+### Lighthouse
+
+Lighthouse validation was run on all pages (both mobile and desktop) in order to check accessibility and performance. At first I received the warning *'Background and foreground colors do not have a sufficient contrast ratio'* in relation to buttons where I had used the Bootstrap class `btn-info`. After I updated the button styling I received the below scores. 
+
+| Page           | Performance  | Accessibility | Best Practices  | SEO |
+|----------------|:------------:|:-------------:|:---------------:|:---:|
+|                |              |               |                 |     |
+| Desktop        |              |               |                 |     |
+| Home           |          100 |            82 |             100 | 100 | 
+| My Bookmarks   |           99 |           100 |             100 | 100 | 
+| Recipes        |           90 |            89 |             100 | 100 | 
+| Delete Comment |           97 |            91 |             100 | 100 | 
+| Update Comment |           95 |            92 |             100 | 100 | 
+| Recipe Detail  |           89 |            90 |             100 | 100 | 
+| Add Recipe     |           81 |            88 |             100 | 100 | 
+| My Recipes     |           94 |            89 |             100 | 100 | 
+| Update Recipe  |           76 |            98 |             100 | 100 | 
+| Delete Recipe  |           97 |            91 |             100 | 100 | 
+| Login          |           97 |            87 |             100 | 100 | 
+| Logout         |           97 |            91 |             100 | 100 | 
+| Signup         |           99 |            87 |             100 | 100 | 
+|                |              |               |                 |     |
+| Mobile         |              |               |                 |     |
+| Home           |           78 |            93 |             100 | 100 |
+| Recipes        |           76 |            88 |             100 | 100 |
+| Recipe Detail  |           75 |            89 |             100 | 100 | 
+| Add Recipe     |           62 |            86 |             100 | 100 | 
+| My Recipes     |           82 |            88 |             100 | 100 | 
+| My Bookmarks   |           82 |            88 |             100 | 100 | 
+| Update Recipe  |           83 |            90 |             100 | 100 | 
+| Delete Recipe  |           90 |            94 |             100 | 100 | 
+| Update Comment |           94 |            91 |              90 | 100 | 
+| Delete Comment |           82 |            94 |             100 | 100 | 
+| Login          |           93 |            90 |             100 | 100 | 
+| Logout         |           84 |            94 |             100 | 100 | 
+| Signup         |           92 |            90 |             100 | 100 | 
+
+
 ## Deployment - Heroku
 To deploy this page to Heroku from its GitHub repository, the following steps were taken:
 
@@ -204,6 +319,28 @@ To deploy this page to Heroku from its GitHub repository, the following steps we
 - Enter a unique and meaningful app name.
 - Next select your region.
 - Click on the Create App button
+
+### Attach the Postgres database:
+- In the Resources tab, under add-ons, type in Postgres and select the Heroku Postgres option.
+- Copy the DATABASE_URL located in Config Vars in the Settings Tab.
+
+### Prepare the environment and settings.py file:
+- In your GitPod workspace, create an env.py file in the main directory.
+- Add the DATABASE_URL value and your chosen SECRET_KEY value to the env.py file. 
+- Update the settings.py file to import the env.py file and add the SECRETKEY and DATABASE_URL file paths.
+- Comment out the default database configuration.
+- Save files and make migrations.
+- Add Cloudinary URL to env.py
+- Add the cloudinary libraries to the list of installed apps.
+- Add the STATIC files settings - the url, storage path, directory path, root path, media url and default file storage path.
+- Link the file to the templates directory in Heroku.
+- Change the templates directory to TEMPLATES_DIR
+- Add Heroku to the ALLOWED_HOSTS list the format ['app_name.heroku.com', 'localhost']
+
+### Create files / directories
+- Create requirements.txt file
+- Create three directories in the main directory; media, storage and templates.
+- Create a file named "Procfile" in the main directory and add the following: web: gunicorn project-name.wsgi
 
 ### Update Heroku Config Vars
 Add the following Config Vars in Heroku:
